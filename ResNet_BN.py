@@ -9,6 +9,9 @@ class CustomModel(nn.Module):
         # Load pre-trained ResNet50 model as backbone
         self.backbone = models.resnet50(weights='ResNet50_Weights.DEFAULT')
         
+        # for param in self.backbone.parameters():
+        #     param.requires_grad = False
+            
         # Replace the final fully connected layer to match the number of classes
         num_features = self.backbone.fc.in_features
         self.backbone.fc = nn.Identity()  # Remove the original FC to add custom layers

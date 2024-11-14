@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torchvision import models
 
+import torch.nn.functional as F
 
 class CustomModel(nn.Module):
     def __init__(self, num_classes=7):
@@ -40,3 +41,4 @@ class CustomModel(nn.Module):
         outputs = self.fc(features)
         
         return outputs
+    

@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from transformers import DeiTModel
+
+
 class Base_DeiTModel(nn.Module):
     def __init__(self, num_classes=7):
         super(Base_DeiTModel, self).__init__()

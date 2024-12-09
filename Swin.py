@@ -46,12 +46,10 @@ class CustomSwinModel(nn.Module):
         self.fc = nn.Linear(num_features, num_classes)
         
         # Input batch normalization for domain-specific adaptation
-        self.input_bn = nn.BatchNorm2d(3)
         self.bn_layer = nn.BatchNorm1d(num_features)
     
     def forward(self, x):
-        # Normalize the input
-        x = self.input_bn(x)
+
         
         # Resize input to match ViT's expected size of 224x224
         x = F.interpolate(x, size=(224, 224), mode="bilinear", align_corners=False)
@@ -60,7 +58,7 @@ class CustomSwinModel(nn.Module):
         features = self.backbone(pixel_values=x).pooler_output
         
         # Apply batch normalization for domain-specific feature adaptation
-        features = self.bn_layer(features)
+        features = self.bn_layer(features) 
         
         # Pass through the custom fully connected layer to get the final output
         outputs = self.fc(features)
